@@ -1,0 +1,6 @@
+# glfw
+---
+exports:
+  header-dirs: [ include ]
+  modules:
+    glfw: fips
