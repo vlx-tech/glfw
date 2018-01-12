@@ -1,6 +1,6 @@
 if ((FIPS_MACOS OR FIPS_WINDOWS OR FIPS_LINUX) AND NOT (FIPS_RASPBERRYPI OR FIPS_OSX_USE_ARC OR FIPS_UWP))
 
-    fips_begin_lib(glfw3)
+    fips_begin_lib(glfw)
 
         include_directories(.. ../src ../include)
         add_definitions(-D_GLFW_USE_CONFIG_H)
@@ -9,9 +9,9 @@ if ((FIPS_MACOS OR FIPS_WINDOWS OR FIPS_LINUX) AND NOT (FIPS_RASPBERRYPI OR FIPS
         endif()
 
         fips_files(../glfw_config.h)
-        fips_dir(../glfw/include/GLFW GROUP .)
+        fips_dir(../include/GLFW GROUP .)
         fips_files(glfw3.h glfw3native.h)
-        fips_dir(../glfw/src GROUP .)
+        fips_dir(../src GROUP .)
         fips_files(
             internal.h
             context.c init.c input.c monitor.c vulkan.c window.c
@@ -56,11 +56,11 @@ if ((FIPS_MACOS OR FIPS_WINDOWS OR FIPS_LINUX) AND NOT (FIPS_RASPBERRYPI OR FIPS
 
     # hack to silence some warnings in GLFW code
     if (FIPS_CLANG)
-        set_target_properties(glfw3 PROPERTIES COMPILE_FLAGS "-Wno-sign-compare -Wno-missing-field-initializers -Wno-deprecated-declarations")
+        set_target_properties(glfw PROPERTIES COMPILE_FLAGS "-Wno-sign-compare -Wno-missing-field-initializers -Wno-deprecated-declarations")
     elseif(FIPS_GCC)
-        set_target_properties(glfw3 PROPERTIES COMPILE_FLAGS "-Wno-sign-compare -Wno-missing-field-initializers")
+        set_target_properties(glfw PROPERTIES COMPILE_FLAGS "-Wno-sign-compare -Wno-missing-field-initializers")
     elseif(FIPS_MSVC)
-        set_target_properties(glfw3 PROPERTIES COMPILE_FLAGS "/wd4152 /wd4204 /wd4242 /wd4244 /wd4668 /wd4996")
+        set_target_properties(glfw PROPERTIES COMPILE_FLAGS "/wd4152 /wd4204 /wd4242 /wd4244 /wd4668 /wd4996")
     endif()
 
 endif()
